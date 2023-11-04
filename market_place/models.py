@@ -14,6 +14,9 @@ class Profile(models.Model):
     date_of_birth = models.DateField(blank=True, null=True, verbose_name=_("Date of birth"))
     picture = models.ImageField(upload_to="profile_picture")
 
+    def __str__(self) -> str:
+        return f"{self.id} - {self.email}"
+
 
 class StorageBox(models.Model):
     id = models.AutoField(primary_key=True)
@@ -36,3 +39,24 @@ class StorageBox(models.Model):
     image_1 = models.ImageField(upload_to="box_picture")
     image_2 = models.ImageField(upload_to="box_picture")
     image_3 = models.ImageField(upload_to="box_picture")
+
+
+    @staticmethod
+    def available_on_period(start_date, end_date):
+        # naively assert both dates are valid, validate in view
+        from booking.models import Booking
+        booked_storage_box_ids = (
+            Booking.objects.filter(
+                start_date__lte=end_date,
+                end_date__gte=start_date,
+            )
+        ).values_list("storage_box_id", flat=True)
+        result = StorageBox.objects.exclude(id__in=booked_storage_box_ids)
+        return result
+
+
+    def __str__(self) -> str:
+        return f"{self.id} - owner: {self.owner.email}"
+
+    class Meta:
+        verbose_name_plural = _("StorageBoxes")
