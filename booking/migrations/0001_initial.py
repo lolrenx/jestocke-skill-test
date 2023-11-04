@@ -7,24 +7,43 @@ import uuid
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
-        ('market_place', '0001_initial'),
+        ("market_place", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Booking',
+            name="Booking",
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('uuid', models.UUIDField(default=uuid.uuid4, editable=False)),
-                ('created_on', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Creation date')),
-                ('start_date', models.DateField(verbose_name='Start date')),
-                ('end_date', models.DateField(verbose_name='End date')),
-                ('storage_box', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='market_place.storagebox', verbose_name='Related storage box')),
-                ('tenant', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='booking_set', to='market_place.profile', verbose_name='Tenant')),
+                ("id", models.AutoField(primary_key=True, serialize=False)),
+                ("uuid", models.UUIDField(default=uuid.uuid4, editable=False)),
+                (
+                    "created_on",
+                    models.DateTimeField(
+                        default=django.utils.timezone.now, verbose_name="Creation date"
+                    ),
+                ),
+                ("start_date", models.DateField(verbose_name="Start date")),
+                ("end_date", models.DateField(verbose_name="End date")),
+                (
+                    "storage_box",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="market_place.storagebox",
+                        verbose_name="Related storage box",
+                    ),
+                ),
+                (
+                    "tenant",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="booking_set",
+                        to="market_place.profile",
+                        verbose_name="Tenant",
+                    ),
+                ),
             ],
         ),
     ]

@@ -6,6 +6,7 @@ from booking.models import Booking
 
 class DropdownFilter(admin.AllValuesFieldListFilter):
     template = "admin/dropdown_filter.html"
+    title = "StorageBox id"
 
 
 @admin.register(Booking)
