@@ -1,0 +1,36 @@
+---
+name: Tests
+
+env:
+  # Used to unset static storage for CI tests
+  CI: true 
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches-ignore:
+      - PRODUCTION
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    if: github.event.pull_request.draft == false
+    name: UnitTest
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install poetry
+        run: pipx install poetry
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'poetry'
+      - name: Install dependencies
+        run: poetry install
+      - name: Run test suite
+        run: poetry run pytest

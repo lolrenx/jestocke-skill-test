@@ -1,0 +1,22 @@
+---
+name: Lint
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    # more infos on possible types here : https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#pull_request
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  pre-commit-ci:
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    - uses: pre-commit/action@v3.0.0
