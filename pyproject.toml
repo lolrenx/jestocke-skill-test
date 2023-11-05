@@ -15,7 +15,11 @@ django-filter = "^23.3"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.2"
+pytest-django = "^4.6.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "jestocke_skill_test.settings"
