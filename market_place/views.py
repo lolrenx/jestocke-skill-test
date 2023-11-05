@@ -28,9 +28,17 @@ def main(request):
     else:
         qs = StorageBox.objects.all()
     f = filters.StorageBoxFilter(request.GET, queryset=qs)
+    
+    # sort qs if filter is applied
+    if f.form.changed_data:
+        storage_boxes = f.qs.order_by(*f.form.changed_data)
+    else:
+        storage_boxes = f.qs
+
     context = {
         "page_title": _("Storage Voxes"),
         "filter": f,
+        "storage_boxes": storage_boxes,
         "date_form": form,
         "start_date": request.GET.get("start_date"),
         "end_date": request.GET.get("end_date"),

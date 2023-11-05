@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from djmoney.forms import MoneyField
+# from djmoney.forms import MoneyField
 
 from market_place.constants import StorageTypes
 
@@ -31,7 +31,8 @@ class StorageBox(models.Model):
     slug = models.SlugField(max_length=128, editable=False, null=True, unique=True)
     description = models.TextField(_("Description"), blank=True, null=True, default="")
     surface = models.IntegerField(_("Surface (m²)"), blank=True, null=True, default=1)
-    monthly_price = MoneyField(max_digits=14, decimal_places=2, default_currency="EUR")
+    monthly_price = models.PositiveIntegerField(_("Monthly price (€)"), default=0)
+    # monthly_price = MoneyField(max_digits=14, decimal_places=2, default_currency="EUR")
 
     street_number = models.CharField("N°", blank=True, null=True, max_length=128)
     route = models.CharField("route", blank=True, null=True, max_length=512)

@@ -261,6 +261,7 @@
             "street_number": "2",
             "route": "rue de Raymond",
             "postal_code": "70874",
+            "monthly_price": "32",
             "city": "PeltierVille"
         }
     },
@@ -276,6 +277,7 @@
             "street_number": "6",
             "route": "rue Daniel Bernard",
             "postal_code": "48999",
+            "monthly_price": "142",
             "city": "Arnaud"
         }
     },
@@ -291,6 +293,7 @@
             "street_number": "1",
             "route": "boulevard de Traore",
             "postal_code": "32126",
+            "monthly_price": "98",
             "city": "Godard"
         }
     },
@@ -306,6 +309,7 @@
             "street_number": "4",
             "route": "boulevard Édouard Raymond",
             "postal_code": "06693",
+            "monthly_price": "106",
             "city": "Gaillard-sur-Mer"
         }
     },
@@ -321,6 +325,7 @@
             "street_number": "2",
             "route": "rue de Dupré",
             "postal_code": "55633",
+            "monthly_price": "116",
             "city": "Martel"
         }
     },
@@ -336,6 +341,7 @@
             "street_number": "7",
             "route": "avenue de Durand",
             "postal_code": "06620",
+            "monthly_price": "87",
             "city": "Sainte Franck"
         }
     },
@@ -351,6 +357,7 @@
             "street_number": "8",
             "route": "rue de Mace",
             "postal_code": "49461",
+            "monthly_price": "95",
             "city": "Lefort-sur-Blanchard"
         }
     },
@@ -366,6 +373,7 @@
             "street_number": "7",
             "route": "avenue de Loiseau",
             "postal_code": "78361",
+            "monthly_price": "91",
             "city": "LegrandVille"
         }
     },
@@ -381,6 +389,7 @@
             "street_number": "7",
             "route": "avenue Henri Brunel",
             "postal_code": "34260",
+            "monthly_price": "54",
             "city": "Boutin-les-Bains"
         }
     },
@@ -396,6 +405,7 @@
             "street_number": "2",
             "route": "boulevard de Berthelot",
             "postal_code": "60228",
+            "monthly_price": "91",
             "city": "Malletnec"
         }
     },
@@ -411,6 +421,7 @@
             "street_number": "4",
             "route": "boulevard Georges Lacombe",
             "postal_code": "76419",
+            "monthly_price": "88",
             "city": "Lévêque-sur-Colas"
         }
     },
@@ -426,6 +437,7 @@
             "street_number": "9",
             "route": "rue Leblanc",
             "postal_code": "76893",
+            "monthly_price": "10",
             "city": "Diallo"
         }
     },
@@ -441,6 +453,7 @@
             "street_number": "9",
             "route": "rue Audrey Moreau",
             "postal_code": "86161",
+            "monthly_price": "112",
             "city": "Julien"
         }
     },
@@ -456,6 +469,7 @@
             "street_number": "9",
             "route": "boulevard Rivière",
             "postal_code": "87155",
+            "monthly_price": "11",
             "city": "Sainte Nicole"
         }
     },
@@ -471,6 +485,7 @@
             "street_number": "9",
             "route": "rue de Bonnet",
             "postal_code": "40682",
+            "monthly_price": "12",
             "city": "Saint Clémence"
         }
     }

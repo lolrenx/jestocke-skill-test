@@ -1,0 +1,86 @@
+
+<script src="https://cdn.jsdelivr.net/gh/tofsjonas/sortable@latest/sortable.min.js"></script>
+<div class="overflow-x-auto mx-10">
+  <table class="sortable table">
+    <thead class="cursor-pointer">
+      <tr>
+        <th>id</th>
+        <th>city</th>
+        <th>title</th>
+        <th>surface</th>
+        <th>monthly price</th>
+        <th>type</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for box in storage_boxes %}
+        <tr>
+          <td>{{ box.id }}</td>
+          <td>{{ box.city }}</td>
+          <td>{{ box.title|truncatechars:20 }}</td>
+          <td>{{ box.surface }}</td>
+          <td>
+            {{ box.monthly_price }}
+          </td>
+          <td>{{ box.storage_type }}</td>
+          <td>
+            <button class="btn" onclick="detail_modal_{{ box.id }}.showModal()">
+              details
+            </button>
+
+            <dialog id="detail_modal_{{ box.id }}" class="modal min-w-content">
+
+              <div class="modal-box card card-compact w-11/12 max-w-5xl" style="padding: 0;">
+
+                <figure><img src="https://source.unsplash.com/featured" alt="Shoes" /></figure>
+                <div class="card-body">
+                  <h2 class="text-3xl font-bold">
+                    {{ box.id }} - {{ box.title|truncatechars:20 }}
+                  </h2>
+                  <div class="stats stats-vertical lg:stats-horizontal shadow">
+                    <div class="stat">
+                      <div class="stat-title">City</div>
+                      <div class="stat-value">{{ box.city }}</div>
+                    </div>
+
+                    <div class="stat">
+                      <div class="stat-title">Surface</div>
+                      <div class="stat-value">{{ box.surface }} m<sup>2</sup></div>
+                    </div>
+
+                    <div class="stat">
+                      <div class="stat-title">Price/month</div>
+                      <div class="stat-value">{{ box.monthly_price }} €</div>
+                    </div>
+
+                  </div>
+                  {% if box.storage_type %}<p>{{ box.storage_type }}</p>{% endif %}
+
+                  {% if box.booking_set %}
+                    <h1>Booking{{ box.booking_set.count|pluralize }}</h1>
+                  {% endif %}
+                  <ul>
+                    {% for booking in box.booking_set.all %}
+                      <li>{{ booking.start_date }} - {{ booking.end_date }}</li>
+                    {% empty %}
+                      <li>This box is always available!</li>
+                    {% endfor %}
+                  </ul>
+
+                  <div class="card-actions justify-end">
+                    <button class="btn btn-border">Book me!</button>
+                  </div>
+                </div>
+
+              </div>
+              <form method="dialog" class="modal-backdrop">
+                <button>close</button>
+              </form>
+            </dialog>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

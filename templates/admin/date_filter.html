@@ -1,0 +1,29 @@
+{% load i18n %}
+<details data-filter-title="{{ title }}" open>
+  <summary>
+    {% blocktranslate with filter_title=title %} By {{ filter_title }} {% endblocktranslate %}
+  </summary>
+  <ul>
+    {% for choice in choices %}
+      <li{% if choice.selected %} class="selected"{% endif %}>
+        <a href="{{ choice.query_string|iriencode }}">{{ choice.display }}</a></li>
+    {% endfor %}
+  </ul>
+</details>
+
+
+<form
+  style="display: flex; flex-direction: column;"
+  action="{% url 'admin:market_place_storagebox_changelist' %}">
+  <label for="start">Start date:</label>
+
+  <input type="date" id="start-date" name="start_date"  />
+  <input type="date" id="end-date" name="end_date"  />
+
+  <input type="submit" value="Submit">
+</form>
+
+<script>
+  document.getElementById("start-date").valueAsDate = new Date();
+  document.getElementById("end-date").valueAsDate = new Date();
+</script>
