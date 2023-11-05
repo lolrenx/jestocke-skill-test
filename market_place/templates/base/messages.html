@@ -1,0 +1,24 @@
+{% if messages %}
+  <ul class="messages m-4">
+    {% for message in messages %}
+      <li class="flex flex-row items-center gap-2
+                 {% if message.tags %}{{ message.tags }}{% endif %}">
+        {{ message }}
+        <span
+          data-script="
+                       on click
+                       transition the closest .alert's opacity to 0 over 500ms
+                       wait 500ms
+                       remove the closest .alert
+                      "
+          class="ml-auto btn btn-ghost btn-square btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-square-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M3 5a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-14z"></path>
+            <path d="M9 9l6 6m0 -6l-6 6"></path>
+          </svg>
+        </span>
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}

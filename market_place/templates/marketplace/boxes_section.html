@@ -1,0 +1,125 @@
+<section
+  id="table-section"
+  hx-trigger="refreshTableSection"
+  hx-target="#table-section"
+  hx-swap="outerHTML"
+  hx-get="{% url 'marketplace:main' %}"
+  hx-select="#table-section"
+>
+
+  {% include 'base/messages.html' %}
+
+  <form
+    class="m-4 flex flex-row items-center gap-4"
+    hx-trigger="change delay:100ms"
+    hx-get="{% url 'marketplace:main' %}"
+    hx-include="[name='start_date'], [name='end_date']"
+    hx-push-url="true"
+    method="get">
+    <dl class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6 flex flex-row gap-4 items-center">
+      {{ filter.form.as_p }}
+      <p>
+        <label for="start-date">Booking dates</label>
+        <input type="date" name="start_date" id="start-date" value="{{ start_date }}"
+               class="input input-bordered input-sm">
+        -
+        <input type="date" name="end_date" id="end-date" value="{{ end_date }}"
+               class="input input-bordered input-sm">
+      </p>
+
+
+      <dt class="truncate text-sm font-medium text-gray-500">Found:</dt>
+      <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ filter.qs.count }}</dd>
+    </dl>
+    <span class="tooltip" data-tip="reset filters">
+      <a href="{% url 'marketplace:main' %}" class="btn btn-ghost">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-filter-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M13.758 19.414l-4.758 1.586v-8.5l-4.48 -4.928a2 2 0 0 1 -.52 -1.345v-2.227h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v1.5"></path>
+          <path d="M22 22l-5 -5"></path>
+          <path d="M17 22l5 -5"></path>
+        </svg>
+      </a>
+    </span>
+  </form>
+
+  <script src="https://cdn.jsdelivr.net/gh/tofsjonas/sortable@latest/sortable.min.js"></script>
+  <div class="overflow-x-auto mx-10">
+    <table class="sortable table">
+      <thead class="cursor-pointer">
+        <tr>
+          <th>id</th>
+          <th>city</th>
+          <th>title</th>
+          <th>surface</th>
+          <th>monthly price</th>
+          <th>type</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for box in filter.qs %}
+          <tr>
+            <td>{{ box.id }}</td>
+            <td>{{ box.city }}</td>
+            <td>{{ box.title|truncatechars:20 }}</td>
+            <td>{{ box.surface }}</td>
+            <td>
+              {{ box.monthly_price.amount }}
+            </td>
+            <td>{{ box.storage_type }}</td>
+            <td>
+              <button class="btn" onclick="detail_modal_{{ box.id }}.showModal()">
+                details
+              </button>
+
+              <dialog id="detail_modal_{{ box.id }}" class="modal min-w-content">
+
+                <div class="modal-box w-11/12 max-w-5xl">
+
+                  <div class="card-body">
+                    <h2 class="text-3xl font-bold">
+                      {{ box.id }} - {{ box.title|truncatechars:20 }}
+                    </h2>
+                    <div class="stats stats-vertical lg:stats-horizontal shadow">
+                      <div class="stat">
+                        <div class="stat-title">City</div>
+                        <div class="stat-value">{{ box.city }}</div>
+                      </div>
+
+                      <div class="stat">
+                        <div class="stat-title">Surface</div>
+                        <div class="stat-value">{{ box.surface }} m<sup>2</sup></div>
+                      </div>
+
+                    </div>
+                    {% if box.storage_type %}<p>{{ box.storage_type }}</p>{% endif %}
+
+                    {% if box.booking_set %}
+                      <h1>Booking{{ box.booking_set.count|pluralize }}</h1>
+                    {% endif %}
+                    <ul>
+                      {% for booking in box.booking_set.all %}
+                        <li>{{ booking.start_date }} - {{ booking.end_date }}</li>
+                      {% empty %}
+                        <li>This box is always available!</li>
+                      {% endfor %}
+                    </ul>
+
+                    <div class="card-actions justify-end">
+                      <button class="btn btn-border">Book me!</button>
+                    </div>
+                  </div>
+
+                </div>
+                <form method="dialog" class="modal-backdrop">
+                  <button>close</button>
+                </form>
+              </dialog>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
