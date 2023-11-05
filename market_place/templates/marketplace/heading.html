@@ -1,0 +1,24 @@
+<section class="p-4 my-6">
+    <p class="font-semibold leading-7 text-blue-600 dark:text-blue-500">
+        Put your valuables in a safe place
+    </p>
+    <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+        Storage boxes provided by
+        <span class="text-blue-600 dark:text-blue-500">the Storage's C2C #1 </span> 
+        provider.
+    </h1>
+    <p
+    data-script="
+    on pointerdown
+        repeat until event pointerup
+        set rand to Math.random() * 360
+        transition
+            *background-color
+            to `hsl($rand 100% 90%)`
+            over 250ms
+    end
+    "
+    class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400 rounded-xl">
+        click table headers headers to sort (currently, money does not render properly)
+    </p>
+</section>

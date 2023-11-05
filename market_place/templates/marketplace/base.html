@@ -1,0 +1,25 @@
+{% load static djmoney %}
+<!DOCTYPE html>
+<html
+lang="fr" id="html">
+
+
+<head>
+
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.7" integrity="sha384-EAzY246d6BpbWR7sQ8+WEm40J8c3dHFsqC58IgPlh4kMbRRI6P6WA+LA/qGAyAu8" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% if page_title %} {{ page_title }} {% endif %}
+    </title>
+</head>
+
+    <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-ext="loading-states">
+        {% block content %}{% endblock %}
+    </body>
+</html>

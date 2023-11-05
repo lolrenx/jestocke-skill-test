@@ -1,0 +1,45 @@
+{% extends "marketplace/base.html" %}
+{% load djmoney %}
+
+{% block content %}
+
+{% include 'marketplace/heading.html' %}
+<div class="divider"></div>
+
+
+<script src="https://cdn.jsdelivr.net/gh/tofsjonas/sortable@latest/sortable.min.js"></script>
+<div class="overflow-x-auto mx-10">
+    <table class="sortable table">
+      <!-- head -->
+      <thead class="cursor-pointer">
+        <tr>
+          <th>id</th>
+          <th>title</th>
+          <th>surface</th>
+          <th>monthly_price</th>
+          <th>storage_type</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for box in storage_boxes %}
+            <tr>
+                <td>{{ box.id }}</td>
+                <td>{{ box.title|truncatechars:20 }}</td>
+                <td>{{ box.surface }}</td>
+                <td>
+                    {# for some reason this does not render correctly #}
+                    {{ box.monthly_price }}
+                    {% comment  %}
+                        {# for some reason this will raise an error #}
+                        {% money_localize box.monthly_price %}
+                    {% endcomment %}
+                </td>
+                <td>{{ box.storage_type }}</td>
+            </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+
+{% endblock %}
