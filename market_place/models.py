@@ -1,4 +1,5 @@
-from django.db import models, queryset
+from django.db import models
+from django.db.models import QuerySet
 from django.utils.translation import gettext_lazy as _
 # from djmoney.forms import MoneyField
 
@@ -45,7 +46,7 @@ class StorageBox(models.Model):
     image_3 = models.ImageField(upload_to="box_picture")
 
     @staticmethod
-    def available_on_period(start_date: str, end_date: str) -> queryset:
+    def available_on_period(start_date: str, end_date: str) -> QuerySet:
         """
         Returns the queryset of StorageBoxes that are available between the given start_date and end_date.
         CAUTION: naively assert both dates are valid, validate in view or form

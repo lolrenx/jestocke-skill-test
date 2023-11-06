@@ -1,3 +1,4 @@
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
@@ -7,8 +8,12 @@ from market_place.models import StorageBox
 from market_place import filters
 
 
+__all__ = [
+    "main",
+]
 
-def main(request):
+
+def main(request: HttpRequest) -> HttpResponse:
     form = BookingDatesForm(
         {
             "start_date": request.GET.get("start_date"),
